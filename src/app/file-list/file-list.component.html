@@ -1,19 +1,26 @@
 <div>
-  <div>
-    <div class="d-flex justify-content-between">
-      <h4>Archivos</h4>
-      <select class="btn btn-primary" id="">
-          <option>Acciones</option>
-          <option><button class="btn btn-primary" (click)="nuevoArchivo()" type="button">Nuevo</button></option>
-          <option><button class="btn btn-primary" (click)="mostrarMensaje()" type="button">Borrar</button></option>
-      </select>
-  </div>
+  <div class="d-flex flex-column justify-content-between">
+    <h4>Archivos</h4>
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">Acciones</button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="#" (click)="nuevoArchivo()">Nuevo</a></li>
+        <li><a class="dropdown-item" href="#" (click)="mostrarMensaje(true)">Borrar</a></li>
+      </ul>
+    </div>
+    <div>
+      @if(this.mostrarCancel==true&&this.selectedFiles.length>1){
+          <h4>Esta seguro que desea borrar?</h4>
+          <button type="button" class="btn btn-danger" (click)="confirmarBorrado()">Confirmar</button>
+          <button type="button" class="btn btn-primary" (click)="mostrarMensaje(false)">Cancelar</button>
+      }
+      @else if(mostrarNuevo){
+        <app-new-file (salidaFile)="recibirFile($event)"></app-new-file>
+      }
+    </div>
   <hr>
   </div>
   <div>
-    @if (mostrarCancel) {
-        <app-file-confirm-delete (salida)="borrarArchivos($event)"></app-file-confirm-delete>
-    }
     <table class="table">
       <thead>
         <tr>
@@ -51,5 +58,4 @@
         }
       </tbody>
     </table>  
-  </div>
 </div>

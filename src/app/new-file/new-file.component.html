@@ -1,0 +1,51 @@
+<div class="m-4">
+    <form (ngSubmit)="enviarFile(form)" #form='ngForm'>
+        <div class="row">
+            <label for="fileName" class="form-label">Nombre</label>
+        </div>
+        <div class="row">
+            <input type="text" name="fileName" class="form-control" placeholder="Ingrese el nombre" [(ngModel)]="emitFile.name">
+        </div>
+        <div class="row">
+            <label for="fileDate" class="form-label">Fecha</label>
+        </div>
+        <div class="row">
+            <input type="date" name="fileDate" class="form-control" [(ngModel)]="emitFile.creation">
+        </div>
+        <div class="row">
+            <label for="fileType" class="form-label">Tipo Archivo</label>
+        </div>
+        <div class="row">
+            <select [(ngModel)]="emitFile.type" class="form-control">
+                <option [value]="fileType.FILE">Archivo</option>
+                <option [value]="fileType.FOLDER">Carpeta</option>
+            </select>
+        </div>
+        <div class="row">
+            <label for="fileFolder" class="form-label">Carpeta</label>
+        </div>
+        <div class="row">
+            <select [(ngModel)]="emitFile.parentId" class="form-control">
+                <option *ngFor="let item of fileFolders" [value]="item.id">{{item.name}}</option>
+            </select>
+        </div>
+        <div class="row">
+            <label for="fileOwners" class="form-label">Dueños</label>
+        </div>
+        <div class="row">
+            <select class="form-control">
+                <option *ngFor="let item of fileOwners" [value]="item">{{item.name}}</option>
+            </select>
+            <div class="d-flex justify-content-between">
+                <button type="button" (click)="addOwner(true)" class="btn btn-secondary">+</button>
+                @if (emitFile.owners.length>0) {
+                    <button type="button" (click)="addOwner(false)" class="btn btn-danger">-</button>        
+                }        
+            </div>
+        </div>
+    </form>
+    <div class="d-flex">
+        <button type="button" class="btn btn-secondary" (click)="volver($event)">Volver</button>
+        <button type="button" class="btn btn-primary" (click)="enviarFile(form)">Guardar</button>
+    </div>
+</div>

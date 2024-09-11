@@ -7,7 +7,7 @@ import { FileListComponent } from './file-list/file-list.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,FileListComponent],
+  imports: [RouterOutlet, FileListComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
